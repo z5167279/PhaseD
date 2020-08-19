@@ -763,7 +763,7 @@ char check_keyboard() {
     case WB_KEYBOARD_UP:
       action = 'F';
       break;
-    case WB_KEYBOARD_LEFT;
+    case WB_KEYBOARD_LEFT:
       action = 'L';
       break;
     case WB_KEYBOARD_RIGHT:
