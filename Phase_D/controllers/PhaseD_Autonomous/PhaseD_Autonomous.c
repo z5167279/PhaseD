@@ -10,6 +10,7 @@
 #include <webots/motor.h>
 #include <webots/position_sensor.h>
 #include <webots/inertial_unit.h>
+#include <webots/keyboard.h>
 
 
 #include <stdio.h>
@@ -755,7 +756,22 @@ void UpdateMap(Map *Maze, WbDeviceTag dis_sensor[]) {
   }
 }
 
-
+char check_keyboard() {
+  char action;
+  int i = wb_keyboard_get_key();
+  switch (i) {
+    case WB_KEYBOARD_UP:
+      action = 'F';
+      break;
+    case WB_KEYBOARD_LEFT;
+      action = 'L';
+      break;
+    case WB_KEYBOARD_RIGHT:
+      action = 'R';
+      break;
+  }
+  return action;
+}
 
 
 int main(int argc, char **argv) {
@@ -789,6 +805,11 @@ int main(int argc, char **argv) {
     dis_sensor[i] = wb_robot_get_device(dis_sensor_name[i]);
     wb_distance_sensor_enable(dis_sensor[i], TIME_STEP);
   }
+  // Initialise keyboard control
+  wb_keyboard_enable(TIME_STEP);
+  printf("Press UP/LEFT/RIGHT to control manually.");
+  Action = check_keyboard();
+  
   //Start Loop 27 = ESC
   while ((Maze.curr_row != center_row) || (Maze.curr_col != center_col)) {
     printf("--- Finding Optimal Path ---\n");
