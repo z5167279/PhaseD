@@ -769,6 +769,9 @@ char check_keyboard() {
     case WB_KEYBOARD_RIGHT:
       action = 'R';
       break;
+    default:
+      action = '\0';
+      break;
   }
   return action;
 }
@@ -807,9 +810,8 @@ int main(int argc, char **argv) {
   }
   // Initialise keyboard control
   wb_keyboard_enable(TIME_STEP);
-  printf("Press UP/LEFT/RIGHT to control manually.");
-  Action = check_keyboard();
-  
+  printf("Press UP/LEFT/RIGHT to control manually.\n");
+   
   //Start Loop 27 = ESC
   while ((Maze.curr_row != center_row) || (Maze.curr_col != center_col)) {
     printf("--- Finding Optimal Path ---\n");
@@ -817,12 +819,15 @@ int main(int argc, char **argv) {
     PrintShortestMazePath(&TempMaze, &Maze_solutions, &Maze, &StringPath);
     PrintShortestPath(&StringPath);
 
-
-    Action = StringPath.PathStrings[StringPath.ShortestPathIndex][3];
+    Action = check_keyboard();
+    if (Action == '\0'){
+      Action = StringPath.PathStrings[StringPath.ShortestPathIndex][3];
+    }
     printf("Finished Planning\n");
 
     // Move Based on Path
     printf("--- Moving Based on Path ---\n");
+    
     MoveOneStep(Action, move_tags, &Maze);
     printf("Finished Moving\n");
 
