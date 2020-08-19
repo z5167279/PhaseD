@@ -10,12 +10,8 @@
  * <webots/motor.h>, etc.
  */
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <webots/robot.h>
 #include <webots/motor.h>
-#include <webots/inertial_unit.h>
-#include <webots/distance_sensor.h>
 #include <webots/position_sensor.h>
 
 #include <webots/keyboard.h>
