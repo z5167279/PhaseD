@@ -810,7 +810,6 @@ int main(int argc, char **argv) {
   }
   // Initialise keyboard control
   wb_keyboard_enable(TIME_STEP);
-  printf("Press UP/LEFT/RIGHT to control manually.\n");
    
   //Start Loop 27 = ESC
   while ((Maze.curr_row != center_row) || (Maze.curr_col != center_col)) {
@@ -827,7 +826,7 @@ int main(int argc, char **argv) {
 
     // Move Based on Path
     printf("--- Moving Based on Path ---\n");
-    
+    printf("Or press UP/LEFT/RIGHT to control manually.\n");
     MoveOneStep(Action, move_tags, &Maze);
     printf("Finished Moving\n");
 
